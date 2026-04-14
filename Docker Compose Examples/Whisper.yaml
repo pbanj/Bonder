@@ -1,0 +1,75 @@
+services:
+  whisper-cpp:
+    build:
+      context: ./whisper-cpp
+      args:
+        - WHISPER_CPP_VERSION=1.7.4
+        - BUILD_FROM=intel/oneapi:2025.0.1-0-devel-ubuntu24.04
+    restart: unless-stopped
+    depends_on:
+      model-download:
+        condition: service_completed_successfully
+    group_add:
+      - "104"
+      - "976"
+      - "1006"
+    security_opt:
+      - no-new-privileges:true
+    volumes:
+      - /home/docker_data/ai/ears/whisper/models:/models
+    networks:
+      - internal_whisper
+    hostname: whispercpp
+    devices:
+      - /dev/dri:/dev/dri
+    environment:
+      - SYCL_CACHE_PERSISTENT=1
+      - SYCL_CACHE_DIR=/models/sycl_cache
+      - SYCL_DEVICE_ALLOWLIST=BackendName:level_zero
+    command: build/bin/whisper-server -l ${WHISPER_LANG} -bs ${WHISPER_BEAM_SIZE} -m /models/ggml-${WHISPER_MODEL}.bin --host 0.0.0.0 --port 8910 --suppress-nst --prompt "${PROMPT}"
+
+  wyoming-api:
+    build:
+      context: ./wyoming-api
+      args:
+        - BUILD_FROM=debian:bookworm-slim
+    restart: unless-stopped
+    group_add:
+      - "104"
+      - "976"
+      - "1006"
+    depends_on:
+      whisper-cpp:
+        condition: service_started
+    security_opt:
+      - no-new-privileges:true
+    networks:
+      internal_whisper:
+      npmn:
+        ipv4_address: 172.21.0.17
+    ports:
+      - "7891:7891"
+    command: script/run --uri tcp://0.0.0.0:7891 --api http://whispercpp:8910/inference
+
+  model-download:
+    security_opt:
+      - no-new-privileges:true
+    build:
+      context: ./model-download
+    group_add:
+      - "104"
+      - "976"
+      - "1006"
+    volumes:
+      - /home/docker_data/ai/ears/whisper/models:/models
+    restart: no
+    networks:
+      - internal_whisper
+    environment:
+      - MODEL=${WHISPER_MODEL}
+
+networks:
+  internal_whisper: {}
+  npmn:
+    external: true
+    name: npm_npmn

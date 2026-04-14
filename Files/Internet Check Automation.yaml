@@ -1,0 +1,36 @@
+alias: Auto-Swap Voice Agents
+description: ""
+triggers:
+  - entity_id: binary_sensor.internet_connection
+    for:
+      minutes: 1
+    trigger: state
+actions:
+  - choose:
+      - conditions:
+          - condition: state
+            entity_id: binary_sensor.internet_connection
+            state: "off"
+        sequence:
+          - target:
+              entity_id: select.default_voice_assistant
+            data:
+              option: Flexo (Local Backup)
+            action: select.select_option
+          - data:
+              message: Internet offline. Voice assistant swapped to local Flexo.
+            action: notify.notify
+      - conditions:
+          - condition: state
+            entity_id: binary_sensor.internet_connection
+            state: "on"
+        sequence:
+          - target:
+              entity_id: select.default_voice_assistant
+            data:
+              option: Bender (Primary)
+            action: select.select_option
+          - data:
+              message: Internet restored. Voice assistant swapped back to Bender.
+            action: notify.notify
+mode: single

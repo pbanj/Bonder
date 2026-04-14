@@ -1,0 +1,117 @@
+services:
+  npm:
+    container_name: nginx-prox-mon
+    image: 'jc21/nginx-proxy-manager'
+    restart: unless-stopped
+    hostname: npm
+    security_opt:
+      - no-new-privileges:true
+    group_add:
+      - 976    
+    environment:
+      - TZ=America/New_York
+    ports:
+      - '80:80'
+      - '8118:81'
+      - '6443:443'
+    volumes:
+      - /home/docker_data/nginxproxy/data:/data
+    networks:
+      npmn:
+        ipv4_address: 172.21.0.2
+
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama
+    security_opt:
+      - no-new-privileges:true
+    restart: unless-stopped
+    group_add:
+      - '104'   # iGPU/Render
+      - '1000'  # Standard User
+      - '1006'
+    environment:
+      - GROUP_ID=976
+      - OLLAMA_HOST=0.0.0.0
+      - TZ=America/New_York
+    ports:
+      - "11434:11434"
+    volumes:
+      - /home/docker_data/ai/brains/ollama:/root/.ollama
+    devices:
+      - '/dev/dri:/dev/dri'
+    networks:
+      npmn:
+        ipv4_address: 172.21.0.13
+
+  openwakeword:
+    image: rhasspy/wyoming-openwakeword:latest
+    container_name: openwakeword
+    security_opt:
+      - no-new-privileges:true
+    restart: unless-stopped
+    group_add:
+      - '1006'
+    environment:
+      - TZ=America/New_York
+      - GROUP_ID=976
+    command: --custom-model-dir /custom
+    volumes:
+      - /home/docker_data/ai/wakewords/open:/custom
+    ports:
+      - "10400:10400"
+    networks:
+      npmn:
+        ipv4_address: 172.21.0.14
+        
+  kokoro-tts:
+    image: ghcr.io/relvacode/kokoro-wyoming:latest
+    container_name: kokoro-tts
+    security_opt:
+      - no-new-privileges:true
+    restart: unless-stopped
+    group_add:
+      - '104'   # iGPU/Render
+      - '1006'
+    environment:
+      - TZ=America/New_York
+      - GROUP_ID=976
+      - DEVICE=intel
+      - ONNX_PROVIDER=OpenVINOExecutionProvider
+    volumes:
+      - /home/docker_data/ai/voices/kokoro:/app/voices
+    ports:
+      - "10210:10210"
+    devices:
+      - '/dev/dri:/dev/dri'
+    networks:
+      npmn:
+        ipv4_address: 172.21.0.15
+        
+  searxng:
+    image: searxng/searxng:latest
+    container_name: searxng
+    security_opt:
+      - no-new-privileges:true
+    restart: unless-stopped
+    group_add:
+      - '104'
+      - '1006'    
+    ports:
+      - "8080:8080"
+    environment:
+      - GROUP_ID=976
+      - SEARXNG_BASE_URL=http://172.21.0.16:8080/
+    volumes:
+      - /home/docker_data/ai/search/searxng:/etc/searxng
+    networks:
+      npmn:
+        ipv4_address: 172.21.0.16        
+
+networks:
+  npmn:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.21.0.0/16
+          gateway: 172.21.0.1

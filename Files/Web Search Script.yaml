@@ -1,0 +1,26 @@
+alias: Benders Browser History Tool
+description: Search the internet for real-time facts, news, or current events.
+fields:
+  query:
+    description: The exact search term or question to look up.
+    example: Current weather in Staunton, VA
+    selector:
+      text: {}
+sequence:
+  - data:
+      query: "{{ query }}"
+    response_variable: search_data
+    action: rest_command.searxng_search
+  - variables:
+      parsed_results: >
+        {% set ns = namespace(text="") %} {% if search_data.content is defined
+        and search_data.content.results is defined %}
+          {% for res in search_data.content.results[:3] %}
+            {% set ns.text = ns.text ~ "- " ~ res.title ~ ": " ~ res.content ~ "\n" %}
+          {% endfor %}
+        {% else %}
+          {% set ns.text = "Search failed. Tell the user the internet connection or SearXNG container is unreachable." %}
+        {% endif %} {{ {"search_results": ns.text} }}
+  - stop: Returning search results to AI
+    response_variable: parsed_results
+mode: single

@@ -1,0 +1,23 @@
+command_line:
+  - sensor:
+      name: benders_memory
+      command: "cat /config/benders_memory.md | jq -Rs '{memory: .}'"
+      value_template: "OK"
+      json_attributes:
+        - memory
+      scan_interval: 120
+      
+rest_command:
+  searxng_search:
+    url: "http://192.168.1.59:8080/search?q={{ query | urlencode }}&format=json"
+    method: GET
+# Create the Master Internet Status sensor
+template:
+  - binary_sensor:
+      - name: "Internet Connection"
+        device_class: connectivity
+        state: >
+          {{ is_state('binary_sensor.ping_google', 'on') or 
+             is_state('binary_sensor.ping_cloudflare', 'on') or 
+             is_state('binary_sensor.ping_quad9', 'on') }}
+      

@@ -1,0 +1,211 @@
+use_default_settings: true
+
+general:
+  debug: false
+  instance_name: "SearXNG"
+  privacypolicy_url: false
+  donation_url: false
+  contact_url: false
+  enable_metrics: true
+  open_metrics: ''
+
+search:
+  safe_search: 1
+  autocomplete: ""
+  autocomplete_min: 4
+  favicon_resolver: ""
+  default_lang: "en-US"
+  ban_time_on_fail: 5
+  max_ban_time_on_fail: 120
+  formats:
+    - html
+    - json
+
+server:
+  port: 8888
+  bind_address: "127.0.0.1"
+  base_url: false
+  limiter: false
+  public_instance: false
+  secret_key: "CHANGEMECHANGEMECHANGEME"
+  image_proxy: false
+  http_protocol_version: "1.0"
+  method: "POST"
+  default_http_headers:
+    X-Content-Type-Options: nosniff
+    X-Download-Options: noopen
+    X-Robots-Tag: noindex, nofollow
+    Referrer-Policy: no-referrer
+
+ui:
+  static_path: ""
+  templates_path: ""
+  query_in_title: false
+  default_theme: simple
+  center_alignment: false
+  default_locale: ""
+  theme_args:
+    simple_style: auto
+  search_on_category_select: true
+  hotkeys: default
+  url_formatting: pretty
+
+engines:
+  # --- ACTIVE AI ENGINES ---
+  - name: duckduckgo
+    engine: duckduckgo
+    shortcut: ddg
+
+  - name: braveapi
+    engine: braveapi
+    api_key: "CHANGEMECHANGEMECHANGEME"  # <-- Paste your API key here
+    shortcut: brv
+
+  - name: startpage
+    engine: startpage
+    shortcut: sp
+
+  - name: currency
+    engine: currency_convert
+    shortcut: cc
+
+  - name: wikipedia
+    engine: wikipedia
+    shortcut: wp
+    display_type: ["infobox"]
+    categories: [general]
+
+  - name: imdb
+    engine: imdb
+    shortcut: imdb
+    timeout: 6.0
+
+  - name: encyclosearch
+    engine: json_engine
+    shortcut: es
+    categories: general
+    paging: true
+    search_url: https://encyclosearch.org/encyclosphere/search?q={query}&page={pageno}&resultsPerPage=15
+    results_query: Results
+    url_query: SourceURL
+    title_query: Title
+    content_query: Description
+
+  - name: openstreetmap
+    engine: openstreetmap
+    shortcut: osm
+
+  - name: pubmed
+    engine: pubmed
+    shortcut: pub
+
+  - name: steam
+    engine: steam
+    shortcut: stm
+
+  # --- ACTIVE WIKIS ---
+  - name: wikibooks
+    engine: mediawiki
+    shortcut: wb
+    base_url: "https://{language}.wikibooks.org/"
+    search_type: text
+
+  - name: wikinews
+    engine: mediawiki
+    shortcut: wn
+    base_url: "https://{language}.wikinews.org/"
+    search_type: text
+    srsort: create_timestamp_desc
+
+  - name: wikiquote
+    engine: mediawiki
+    shortcut: wq
+    base_url: "https://{language}.wikiquote.org/"
+    search_type: text
+
+  - name: wikisource
+    engine: mediawiki
+    shortcut: ws
+    base_url: "https://{language}.wikisource.org/"
+    search_type: text
+
+  - name: wikispecies
+    engine: mediawiki
+    shortcut: wsp
+    base_url: "https://species.wikimedia.org/"
+    search_type: text
+
+  - name: wiktionary
+    engine: mediawiki
+    shortcut: wt
+    base_url: "https://{language}.wiktionary.org/"
+    search_type: text
+
+  - name: wikiversity
+    engine: mediawiki
+    shortcut: wv
+    base_url: "https://{language}.wikiversity.org/"
+    search_type: text
+
+  - name: wikivoyage
+    engine: mediawiki
+    shortcut: wy
+    base_url: "https://{language}.wikivoyage.org/"
+    search_type: text
+
+  - name: minecraft wiki
+    engine: mediawiki
+    shortcut: mcw
+    base_url: https://minecraft.wiki/
+    api_path: "api.php"
+    search_type: text
+
+  # --- EXPLICITLY DISABLED DEFAULT SCRAPERS ---
+  - name: google
+    engine: google
+    disabled: true
+
+  - name: bing
+    engine: bing
+    disabled: true
+
+  - name: yahoo
+    engine: yahoo
+    disabled: true
+
+  - name: qwant
+    engine: qwant
+    disabled: true
+
+  - name: baidu
+    engine: baidu
+    disabled: true
+
+  - name: yandex
+    engine: yandex
+    disabled: true
+
+  - name: brave
+    engine: brave
+    disabled: true
+
+  # Disable media variants so Bender only gets clean text
+  - name: duckduckgo images
+    engine: duckduckgo_extra
+    disabled: true
+
+  - name: duckduckgo videos
+    engine: duckduckgo_extra
+    disabled: true
+
+  - name: duckduckgo news
+    engine: duckduckgo_extra
+    disabled: true
+
+  - name: startpage images
+    engine: startpage
+    disabled: true
+
+  - name: startpage news
+    engine: startpage
+    disabled: true
