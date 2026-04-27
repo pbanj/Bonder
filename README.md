@@ -93,7 +93,7 @@ This repo serves as a home for the prompt, voice, scripts, automation, docker co
 
 Listen to the different quality levels of the Bonder voice:
 
-> [High](./Voice/sample/test_bonder_high.wav) | [Medium](./Voice/sample/test_bonder_medium.wav) | [Low](./Voice/sample/test_bonder_low.wav)
+> [High](./Voice/Samples/test_bonder_high.wav) | [Medium](./Voice/Samples/test_bonder_medium.wav) | [Low](./Voice/Samples/test_bonder_low.wav)
 
 
 ### Internet check  
