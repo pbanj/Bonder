@@ -95,9 +95,9 @@ Listen to the different quality levels of the Bonder voice:
 
 | Quality | Preview Player |
 | :--- | :--- |
-| **High** | <audio src="https://github.com/user-attachments/files/27119909/test_bonder_high.wav" controls></audio> |
-| **Medium** | <audio src="https://github.com/user-attachments/files/27119925/test_bonder_medium.wav" controls></audio> |
-| **Low** | <audio src="https://github.com/user-attachments/files/27119931/test_bonder_low.wav" controls></audio> |
+| **High** | <audio src="https://github.com/user-attachments/files/27120288/test_bonder_high.mp3" controls type="audio/mpeg"></audio> |
+| **Medium** | <audio src="https://github.com/user-attachments/files/27120295/test_bonder_medium.mp3" controls type="audio/mpeg"></audio> |
+| **Low** | <audio src="https://github.com/user-attachments/files/27120297/test_bonder_low.mp3" controls type="audio/mpeg"></audio> |
 
 > If the players do not appear, you can listen to the files directly: 
 > [High](./Voice/sample/test_bonder_high.wav) | [Medium](./Voice/sample/test_bonder_medium.wav) | [Low](./Voice/sample/test_bonder_low.wav)
