@@ -95,11 +95,12 @@ Listen to the different quality levels of the Bonder voice:
 
 | Quality | Preview Player |
 | :--- | :--- |
-| **High** | <audio controls src="https://raw.githubusercontent.com/pbanj/Bonder/main/Voice/Samples/test_bonder_high.wav"></audio> |
-| **Medium** | <audio controls src="https://raw.githubusercontent.com/pbanj/Bonder/main/Voice/Samples/test_bonder_medium.wav"></audio> |
-| **Low** | <audio controls src="https://raw.githubusercontent.com/pbanj/Bonder/main/Voice/Samples/test_bonder_low.wav"></audio> |
+| **High** | <audio src="https://github.com/user-attachments/files/27119909/test_bonder_high.wav" controls></audio> |
+| **Medium** | <audio src="https://github.com/user-attachments/files/27119925/test_bonder_medium.wav" controls></audio> |
+| **Low** | <audio src="https://github.com/user-attachments/files/27119931/test_bonder_low.wav" controls></audio> |
 
-------
+> If the players do not appear, you can listen to the files directly: 
+> [High](./Voice/sample/test_bonder_high.wav) | [Medium](./Voice/sample/test_bonder_medium.wav) | [Low](./Voice/sample/test_bonder_low.wav)
 
 
 ### Internet check  
