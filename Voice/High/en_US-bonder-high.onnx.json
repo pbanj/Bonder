@@ -1,0 +1,43 @@
+{
+    "dataset": "en_US-bonder-high",
+    "audio": {
+        "sample_rate": 22050,
+        "quality": "high"
+    },
+    "espeak": {
+        "voice": "en-us"
+    },
+    "language": {
+        "code": "en_US",
+        "family": "en",
+        "region": "US",
+        "name_native": "English",
+        "name_english": "English"
+    },
+    "inference": {
+        "noise_scale": 0.667,
+        "length_scale": 0.9,
+        "noise_w": 0.8
+    },
+    "phoneme_type": "espeak",
+    "phoneme_map": {},
+    "phoneme_id_map": {},
+    "num_symbols": 256,
+    "num_speakers": 1,
+    "speaker_id_map": {},
+    "piper_version": "1.0.0",
+    "metadata": {
+        "name": "Bonder",
+        "language": "en_US",
+        "speakers": 1,
+        "quality": "high",
+        "sample_rate": 22050,
+        "dataset_url": "https://github.com/pbanj/Bonder/blob/main/Voice/High/en_US-bonder-high.onnx",
+        "license": "CC BY-NC 4.0 (Non-Commercial, No Rehosting. See README for John DiMaggio Clause)",
+        "training": {
+            "type": "Fine-tuned",
+            "base_model": "en_US-lessac-high.ckpt",
+            "steps": "~11,300+ steps past base"
+        }
+    }
+}

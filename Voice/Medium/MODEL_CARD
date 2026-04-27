@@ -1,0 +1,21 @@
+# Model card for bonder (medium)
+
+* **Language:** en_US (normalized)
+* **Speakers:** 1
+* **Quality:** medium
+* **Samplerate:** 22050Hz
+
+## Dataset
+* **URL:** https://github.com/pbanj/Bonder/blob/main/Voice/Medium/en_US-bonder-medium.onnx
+* **License:** CC BY-NC 4.0 + Custom Restrictions
+
+## Licensing & Usage
+This voice model is a transformative tribute and is **NOT** for commercial use.
+* **Non-Commercial:** No profit, paid services, or revenue-generating projects.
+* **No Rehosting:** Redistribution is restricted to GitHub forks only. 
+* **Artist Grant:** Full rights are granted to John DiMaggio to use, sell, or relicense this specific file as he sees fit.
+* **The Rule:** If you want to make money off this, pay the artist. Don't be that guy.
+
+## Training
+* **Type:** Fine-tuned
+* **Steps:** ~11,300+ steps past base

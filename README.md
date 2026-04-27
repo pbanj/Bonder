@@ -1,3 +1,26 @@
+## **Licensing**
+
+This project uses a split-licensing model. By using this repository, you agree to the terms of both licenses as they apply to their respective components:
+
+#### **1. Project Code & Scripts**
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+* **Applies to:** All `.txt`, `.yaml`, `.yml`, `.md`  files, `docker-compose` examples, Python scripts, and documentation. Essentially everything NOT in the voice folder.
+* **License:** **[MIT License](./LICENSE)**. You are free to use, modify, and distribute this code as long as the original copyright notice is included.
+
+#### **2. Voice Models (The "Bonder" Voices)**
+[![License: CC BY-NC 4.0](https://img.shields.io/badge/License-CC%20BY--NC%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc/4.0/)
+
+The custom Piper voice models provided in this repo are licensed under **[Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)](https://creativecommons.org/licenses/by-nc/4.0/)** with the following **Additional Terms & Permissions**:
+
+* **Attribution & Rehosting:** You must give credit if you share or adapt these models. **Restriction:** You are not authorized to rehost or reupload these models to any third-party sites (e.g., Hugging Face, CivitAI, Discord). GitHub forks are the sole exception as they automatically include the files.
+* **Non-Commercial:** You **MAY NOT** use these voice models for any commercial purposes, paid services, or revenue-generating projects. 
+* **Purpose:** These are transformative works created for personal, hobbyist use as a tribute to the character "Bender" and are not intended to replace or infringe upon the professional work of John DiMaggio.
+* **The "John DiMaggio" Clause:** If you are John DiMaggio, feel free to do what you want with these files, including selling or relicensing them. 
+* **The "Don't Be That Guy" Rule:** If you want to make money off this voice, **pay John**. Commercial use without his direct involvement is strictly prohibited.
+
+---
+
 # Bonder  
 
 A smart ass AI assistant for Home Assistant.  
@@ -53,8 +76,8 @@ This repo serves as a home for the prompt, scripts, automation, docker compose e
 - Uses the H.A. Notify function.
   - The config yaml contains the parts that need to be added to your HA config.   
     - Using this instead of just writing to a text file. HA has a really low limit of 250 characters for that.
-- Can sound just like bender.
-  - Uses [Kokoro](https://github.com/hexgrad/kokoro) for the TTS as it can mimic the voice by using a sound file to train itself. I wont share this as it isn't my voice to share.  
+- Sound like bender.
+  - I have personally created voice files that are licensed differently than the rest of the repo. I paid money to rent a server to do it.  
 - Uses [Whisper](https://github.com/tannisroot/wyoming-whisper-cpp-intel-gpu-docker). Docker is a little weird to setup as it must be built. But that's easy. 
   - I included a .env example. The prompt section is for you to put words that are common or the STT mishears. 
 - The compose files are more of an example than ready to use files.  
@@ -228,5 +251,16 @@ I had some cost examples made by g3p.
    ***>>> THIS IS NOT PRIVATE LIKE PAID IS. <<<***
    - **OpenAI:** Doesn't typically offer a permanent free API tier; usage is "pay-as-you-go" from your credit balance, **your balance expires**. I'd personally avoid OpenAI.
 
-------
 
+### Privacy & Data Safety
+
+
+**The Gemini "Privacy Gap"**
+ By default, if you use the **Free Tier** of Google AI Studio, your prompts and home data are **NOT PRIVATE**—Google uses them to train and improve their models. 
+ 
+ **To ensure 100% Privacy:**  
+ 1. Link a billing account to your [Google AI Studio](https://aistudio.google.com/) project. 
+ 2. Even if you stay under the free usage limits, being on a **Paid/Pay-as-you-go** tier legally changes your data status. 
+ 3. Under the Paid terms, Google is **prohibited** from using your inputs or outputs to train their models. For a smart home assistant with access to your entities, this is a mandatory step.
+
+---
