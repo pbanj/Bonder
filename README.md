@@ -30,7 +30,7 @@ Only I forgot the black jack and hookers.
 
 I started working on this ages ago but gave up on it as the AI available was kind of shit at portraying Bender. Well all that has changed.  
 
-This repo serves as a home for the prompt, scripts, automation, docker compose examples, and WakeWords.  
+This repo serves as a home for the prompt, voice, scripts, automation, docker compose examples, and WakeWords.  
 
  **Full disclosure**  
 - I did use Gemini 3 Pro to help work out the kinks and get the personality right.  
