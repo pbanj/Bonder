@@ -1,90 +1,119 @@
-use_default_settings: true
+# =============================================================================
+# SearXNG Configuration - "Bonder" Assistant Edition (April 2026)
+# =============================================================================
+use_default_settings: false # Disables default engines to save resources and speed up the searching.
 
 general:
-  debug: false
   instance_name: "SearXNG"
+  enable_metrics: false
+  enable_limiter: false
   privacypolicy_url: false
   donation_url: false
   contact_url: false
-  enable_metrics: true
-  open_metrics: ''
+  
+brand:
+  docs_url: https://docs.searxng.org/
+  issue_url: https://github.com/searxng/searxng/issues
+
+ui:
+  static_path: ""
+  templates_path: ""
+  query_in_title: true
+  infinite_scroll: false
+  center_alignment: false
+  theme_args:
+    oscar_style: "logy"
+
+plugins:
+  searx.plugins.calculator.SXNGPlugin:
+    active: true
+  searx.plugins.unit_converter.SXNGPlugin:
+    active: true
+  searx.plugins.ahmia_filter.SXNGPlugin:
+    active: false
+
+# --- DOI (Digital Object Identifier) RESOLVERS ---
+# A DOI is a permanent "serial number" for academic papers, datasets, and reports.
+# These resolvers ensure that when SearXNG finds a DOI (like 10.1093/example), 
+# it can transform it into a clickable link that points to the actual document.
+# If this section is missing while 'use_default_settings' is false, the engine 
+# will crash with a 'KeyError' when it tries to process scholarly results.
+doi_resolvers:
+  oadoi.org: "https://oadoi.org/"   # Primary resolver for Open Access (free) papers
+  sci-hub: "https://sci-hub.se/"     # Alternative resolver for reaching paywalled research
+
+default_doi_resolver: "oadoi.org"    # The fallback service used if no others are specified
+
+outputs:
+  json: # Essential for the Bender/Home Assistant bridge.
+    format: "json"
+    content_type: "application/json"
 
 search:
   safe_search: 1
-  autocomplete: ""
-  autocomplete_min: 4
-  favicon_resolver: ""
+  autocomplete: "duckduckgo"
   default_lang: "en-US"
   ban_time_on_fail: 5
   max_ban_time_on_fail: 120
   formats:
     - html
     - json
-
+    
 server:
-  port: 8888
-  bind_address: "127.0.0.1"
-  base_url: false
-  limiter: false
-  public_instance: false
-  secret_key: "CHANGEMECHANGEMECHANGEME"
-  image_proxy: false
+  port: 8080
+  bind_address: "0.0.0.0"
+  public_instance: false  
+  secret_key: "CHANGEMECHANGEMECHANGEMECHANGEMECHANGEMECHANGEMECHANGEME"
   http_protocol_version: "1.0"
   method: "POST"
-  default_http_headers:
-    X-Content-Type-Options: nosniff
-    X-Download-Options: noopen
-    X-Robots-Tag: noindex, nofollow
-    Referrer-Policy: no-referrer
 
-ui:
-  static_path: ""
-  templates_path: ""
-  query_in_title: false
-  default_theme: simple
-  center_alignment: false
-  default_locale: ""
-  theme_args:
-    simple_style: auto
-  search_on_category_select: true
-  hotkeys: default
-  url_formatting: pretty
+categories_as_tabs:
+  general:
+  it:
+  science:
+  map:
 
 engines:
-  # --- ACTIVE AI ENGINES ---
+  # --- PRIMARY SEARCH ---
+  - name: braveapi
+    # High-quality, independent search index; privacy-first and great for AI grounding.
+    engine: braveapi
+    api_key: "CHANGEMECHANGEMECHANGEMECHANGEMECHANGEME"
+    shortcut: brv
+    inactive: false
+    categories: general
+
   - name: duckduckgo
+    # Privacy-focused engine that doesn't track or profile "meatbags."
     engine: duckduckgo
     shortcut: ddg
-
-  - name: braveapi
-    engine: braveapi
-    api_key: "CHANGEMECHANGEMECHANGEME"  # <-- Paste your API key here
-    shortcut: brv
+    categories: general
 
   - name: startpage
+    # Delivers Google/Bing results via proxy for maximum anonymity.
     engine: startpage
     shortcut: sp
+    categories: general
 
-  - name: currency
-    engine: currency_convert
-    shortcut: cc
-
+  # --- KNOWLEDGE BASES ---
   - name: wikipedia
+    # The ultimate crowd-sourced knowledge base for Bender's basic facts.
     engine: wikipedia
     shortcut: wp
     display_type: ["infobox"]
-    categories: [general]
+    categories: general
 
   - name: imdb
+    # Global database for movies, TV, and cast info.
     engine: imdb
     shortcut: imdb
-    timeout: 6.0
+    categories: general
 
   - name: encyclosearch
+    # Aggregator that searches over a dozen encyclopedias at once.
     engine: json_engine
     shortcut: es
     categories: general
-    paging: true
     search_url: https://encyclosearch.org/encyclosphere/search?q={query}&page={pageno}&resultsPerPage=15
     results_query: Results
     url_query: SourceURL
@@ -92,120 +121,91 @@ engines:
     content_query: Description
 
   - name: openstreetmap
+    # Free, community-driven geospatial data; the "Wikipedia of maps."
     engine: openstreetmap
     shortcut: osm
-
-  - name: pubmed
-    engine: pubmed
-    shortcut: pub
+    categories: map
 
   - name: steam
+    # Search for PC games, pricing, and reviews on the Steam store.
     engine: steam
     shortcut: stm
+    categories: general
 
-  # --- ACTIVE WIKIS ---
+  # --- WIKIMEDIA NETWORK ---
   - name: wikibooks
+    # Open-content textbooks and annotated texts.
     engine: mediawiki
     shortcut: wb
     base_url: "https://{language}.wikibooks.org/"
-    search_type: text
+    categories: general
 
   - name: wikinews
+    # Collaborative news source for real-time (but manual) reporting.
     engine: mediawiki
     shortcut: wn
     base_url: "https://{language}.wikinews.org/"
-    search_type: text
-    srsort: create_timestamp_desc
+    categories: general
 
   - name: wikiquote
+    # Vast collection of quotations from famous people and literary works.
     engine: mediawiki
     shortcut: wq
     base_url: "https://{language}.wikiquote.org/"
-    search_type: text
+    categories: general
 
   - name: wikisource
+    # Library of free-content primary source texts.
     engine: mediawiki
     shortcut: ws
     base_url: "https://{language}.wikisource.org/"
-    search_type: text
+    categories: general
 
   - name: wikispecies
+    # Free directory for all species of animals, plants, and life.
     engine: mediawiki
     shortcut: wsp
     base_url: "https://species.wikimedia.org/"
-    search_type: text
+    categories: science
 
   - name: wiktionary
+    # Collaborative dictionary for etymology, pronunciations, and synonyms.
     engine: mediawiki
     shortcut: wt
     base_url: "https://{language}.wiktionary.org/"
-    search_type: text
+    categories: general
 
   - name: wikiversity
+    # Learning resources and research materials for all levels of education.
     engine: mediawiki
     shortcut: wv
     base_url: "https://{language}.wikiversity.org/"
-    search_type: text
+    categories: general
 
   - name: wikivoyage
+    # Open-source travel guide for cities and destinations.
     engine: mediawiki
     shortcut: wy
     base_url: "https://{language}.wikivoyage.org/"
-    search_type: text
+    categories: map
 
+  # --- GAMING & UTILITY ---
   - name: minecraft wiki
+    # Definitive source for crafting, game mechanics, and updates.
     engine: mediawiki
     shortcut: mcw
     base_url: https://minecraft.wiki/
     api_path: "api.php"
-    search_type: text
+    categories: [it, general]
 
-  # --- EXPLICITLY DISABLED DEFAULT SCRAPERS ---
-  - name: google
-    engine: google
-    disabled: true
+  - name: currency
+    # Real-time tool for converting between global "meatbag" currencies.
+    engine: currency_convert
+    shortcut: cc
+    categories: general
 
-  - name: bing
-    engine: bing
-    disabled: true
-
-  - name: yahoo
-    engine: yahoo
-    disabled: true
-
-  - name: qwant
-    engine: qwant
-    disabled: true
-
-  - name: baidu
-    engine: baidu
-    disabled: true
-
-  - name: yandex
-    engine: yandex
-    disabled: true
-
-  - name: brave
-    engine: brave
-    disabled: true
-
-  # Disable media variants so Bender only gets clean text
-  - name: duckduckgo images
-    engine: duckduckgo_extra
-    disabled: true
-
-  - name: duckduckgo videos
-    engine: duckduckgo_extra
-    disabled: true
-
-  - name: duckduckgo news
-    engine: duckduckgo_extra
-    disabled: true
-
-  - name: startpage images
-    engine: startpage
-    disabled: true
-
-  - name: startpage news
-    engine: startpage
-    disabled: true
+  - name: pubmed
+    # Massive database for biomedical and life sciences literature.
+    engine: pubmed
+    shortcut: pub
+    categories: science

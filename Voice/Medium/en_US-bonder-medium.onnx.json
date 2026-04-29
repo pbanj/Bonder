@@ -1,18 +1,23 @@
 {
-    "dataset": "bonder-medium",
+    "dataset": "en_US-bonder-medium",
     "audio": {
-        "sample_rate": 22050,
+        "sample_rate": 16000,
         "quality": "medium"
     },
     "espeak": {
-        "voice": "en-us"
+        "voice": "en_us"
     },
     "language": {
-        "code": "en-us"
+        "code": "en_US",
+        "family": "en",
+        "region": "US",
+        "name_native": "American English",
+        "name_english": "American English",
+        "country_english": "United States"
     },
     "inference": {
         "noise_scale": 0.667,
-        "length_scale": 0.9,
+        "length_scale": 0.85,
         "noise_w": 0.8
     },
     "phoneme_type": "espeak",
@@ -24,11 +29,12 @@
     "piper_version": "1.0.0",
     "metadata": {
         "name": "en_US-bonder-medium",
+        "family": "bonder",
         "language": "en_US",
         "speakers": 1,
         "quality": "medium",
-        "sample_rate": 22050,
-        "dataset_url": "https://github.com/pbanj/Bonder/blob/main/Voice/Medium/en_US-bonder_medium.onnx",
+        "sample_rate": 16000,
+        "dataset_url": "https://github.com/pbanj/Bonder/blob/main/Voice/Medium/en_US-bonder-medium.onnx",
         "license": "CC BY-NC 4.0 (Non-Commercial, No Rehosting. See README for John DiMaggio Clause)",
         "training": {
             "type": "Fine-tuned",

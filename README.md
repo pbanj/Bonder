@@ -45,6 +45,8 @@ This repo serves as a home for the prompt, voice, scripts, automation, docker co
 - I had G3P estimate the cost and it will be way cheaper to run it this way vs fully local. 
   - I have 60 entities exposed and that gets factored into the cost to run.  
 - I also used it to help with some parts of the readme.  
+- 04/29/2026, Had the ai add comments to the searxng setting example. 
+
 
 ------
 
@@ -77,7 +79,7 @@ This repo serves as a home for the prompt, voice, scripts, automation, docker co
   - The config yaml contains the parts that need to be added to your HA config.   
     - Using this instead of just writing to a text file. HA has a really low limit of 250 characters for that.
 - Sound like bender.
-  - I have personally created voice files that are licensed differently than the rest of the repo. I paid money to rent a server to do it.  
+  - I have personally created voice files that are licensed differently than the rest of the repo. I paid money to rent a server to do it. medium quality apparently failed to be made correctly so it's currently broken. high and llow are fine.  
 - Uses [Whisper](https://github.com/tannisroot/wyoming-whisper-cpp-intel-gpu-docker). Docker is a little weird to setup as it must be built. But that's easy. 
   - I included a .env example. The prompt section is for you to put words that are common or the STT mishears. 
 - The compose files are more of an example than ready to use files.  

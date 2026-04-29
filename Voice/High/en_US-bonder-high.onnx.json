@@ -5,18 +5,19 @@
         "quality": "high"
     },
     "espeak": {
-        "voice": "en-us"
+        "voice": "en_us"
     },
     "language": {
         "code": "en_US",
         "family": "en",
         "region": "US",
-        "name_native": "English",
-        "name_english": "English"
+        "name_native": "American English",
+        "name_english": "American English",
+        "country_english": "United States"
     },
     "inference": {
         "noise_scale": 0.667,
-        "length_scale": 0.9,
+        "length_scale": 0.85,
         "noise_w": 0.8
     },
     "phoneme_type": "espeak",
@@ -27,7 +28,8 @@
     "speaker_id_map": {},
     "piper_version": "1.0.0",
     "metadata": {
-        "name": "Bonder",
+        "name": "en_US-bonder-high",
+        "family": "bonder",
         "language": "en_US",
         "speakers": 1,
         "quality": "high",
@@ -36,7 +38,7 @@
         "license": "CC BY-NC 4.0 (Non-Commercial, No Rehosting. See README for John DiMaggio Clause)",
         "training": {
             "type": "Fine-tuned",
-            "base_model": "en_US-lessac-high.ckpt",
+            "base_model": "en_US-lessac-medium.ckpt",
             "steps": "~11,300+ steps past base"
         }
     }

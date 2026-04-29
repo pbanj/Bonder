@@ -1,14 +1,19 @@
 {
-    "dataset": "bonder-low",
+    "dataset": "en_US-bonder-low",
     "audio": {
         "sample_rate": 16000,
-        "quality": "medium"
+        "quality": "low"
     },
     "espeak": {
-        "voice": "en-us"
+        "voice": "en_us"
     },
     "language": {
-        "code": "en-us"
+        "code": "en_US",
+        "family": "en",
+        "region": "US",
+        "name_native": "American English",
+        "name_english": "American English",
+        "country_english": "United States"
     },
     "inference": {
         "noise_scale": 0.667,
@@ -24,17 +29,17 @@
     "piper_version": "1.0.0",
     "metadata": {
         "name": "en_US-bonder-low",
+        "family": "bonder",
         "language": "en_US",
         "speakers": 1,
         "quality": "low",
         "sample_rate": 16000,
-        "dataset_url": "https://github.com/pbanj/Bonder/blob/main/Voice/Low/en_US-bonder_low.onnx",
+        "dataset_url": "https://github.com/pbanj/Bonder/blob/main/Voice/Low/en_US-bonder-low.onnx",
         "license": "CC BY-NC 4.0 (Non-Commercial, No Rehosting. See README for John DiMaggio Clause)",
         "training": {
             "type": "Fine-tuned",
-            "base_model": "en_US-lessac-low.ckpt",
+            "base_model": "en_US-lessac-medium.ckpt",
             "steps": "~11,300+ steps past base"
         }
     }
 }
-
