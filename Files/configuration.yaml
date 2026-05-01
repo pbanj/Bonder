@@ -6,11 +6,19 @@ command_line:
       json_attributes:
         - memory
       scan_interval: 120
-      
+# Pick one of the following based on what you have set in searxng and remove the other      
 rest_command:
   searxng_search:
     url: "http://192.168.1.59:8080/search?q={{ query | urlencode }}&format=json"
     method: GET
+
+rest_command:
+  searxng_search:
+    url: "http://192.168.1.59:8080/search"
+    method: POST
+    content_type: "application/x-www-form-urlencoded"
+    payload: "q={{ query | urlencode }}&format=json"
+
 # Create the Master Internet Status sensor
 template:
   - binary_sensor:
