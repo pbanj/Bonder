@@ -6,7 +6,7 @@ command_line:
       json_attributes:
         - memory
       scan_interval: 120
-# Pick one of the following based on what you have set in searxng and remove the other      
+# Pick one of the following based on what you have set in searxng and remove the other. Adjust the IP.      
 rest_command:
   searxng_search:
     url: "http://192.168.1.59:8080/search?q={{ query | urlencode }}&format=json"
